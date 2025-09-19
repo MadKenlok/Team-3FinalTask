@@ -1,4 +1,4 @@
-package main.java.com.tracker.collection;
+package com.tracker.collection;
 
 import java.util.Comparator;
 

@@ -1,5 +1,10 @@
 package com.tracker;
 
+import com.tracker.collection.Task;
+import com.tracker.manager.DataSourceManager;
+import com.tracker.manager.SearchManager;
+import com.tracker.manager.SortManager;
+import com.tracker.manager.TaskManager;
 import java.util.List;
 import java.util.Scanner;
 
@@ -147,7 +152,7 @@ public class App {
                 Task.Priority priority = Task.Priority.valueOf(
                     switch(priorityInput) {
                         case "1" -> "LOW";
-                        case "2" -> "MEDIUM"; 
+                        case "2" -> "MEDIUM";
                         case "3" -> "HIGH";
                         case "4" -> "URGENT";
                         default -> "LOW";

@@ -1,9 +1,9 @@
-package main.java.com.tracker.collection;
+package com.tracker.collection;
 
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.IntStream;
-import main.java.com.tracker.collection.Task.Status;
+import com.tracker.collection.Task.Status;
 
 
 public class TaskGenerator {
