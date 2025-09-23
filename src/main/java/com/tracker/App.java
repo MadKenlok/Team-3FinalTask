@@ -114,10 +114,10 @@ public class App {
         System.out.println("1. По приоритету");
         System.out.println("2. По дате выполнения");
         System.out.println("3. По названию");
-        System.out.println("4. Быстрая сортировка (QuickSort)");
-        System.out.println("5. Сортировка пузырьком (BubbleSort)");
-        System.out.println("6. Сортировка слиянием (MergeSort)");
-        System.out.println("7. EvenOdd сортировка по четности id (четные сортируются)");
+        System.out.println("4. Быстрая сортировка");
+        System.out.println("5. Сортировка пузырьком");
+        System.out.println("6. Сортировка слиянием");
+        System.out.println("7. Сортировка по четности id (четные сортируются)");
         System.out.print("Выберите тип сортировки: ");
         
         String sortType = scanner.nextLine();
@@ -166,12 +166,17 @@ public class App {
             }
             case "3" -> {
                 System.out.print("Введите ID для поиска: ");
-                int id = Integer.parseInt(scanner.nextLine());
-                Task result = searchManager.binarySearchById(taskManager.getAllTasks(), id);
-                if (result != null) {
-                    System.out.println("✅ Найдена задача: " + result);
-                } else {
-                    System.out.println("❌ Задача с ID " + id + " не найдена");
+                String raw = scanner.nextLine();
+                try {
+                    int id = Integer.parseInt(raw.trim());
+                    Task result = searchManager.binarySearchById(taskManager.getAllTasks(), id);
+                    if (result != null) {
+                        System.out.println("✅ Найдена задача: " + result);
+                    } else {
+                        System.out.println("❌ Задача с ID " + id + " не найдена");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("❌ Некорректный ID. Введите целое число.");
                 }
             }
             case "4" -> {
@@ -231,7 +236,14 @@ public class App {
     }
     
     private static void addTaskManually() {
-        dataSourceManager.loadFromManualInput();
+        CustomList<Task> newTasks = dataSourceManager.loadFromManualInput();
+        if (newTasks != null && !newTasks.isEmpty()) {
+            taskManager.addTasks(newTasks);
+            System.out.println("✅ Добавлено задач: " + newTasks.size());
+            showAllTasks();
+        } else {
+            System.out.println("❌ Задачи не были добавлены");
+        }
     }
 
     private static void saveTasksToFile() {
