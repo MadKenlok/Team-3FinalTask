@@ -1,16 +1,20 @@
 package com.tracker.integration;
 
-import com.tracker.collection.CustomList;
-import com.tracker.collection.Task;
-import com.tracker.exception.FileProcessingException;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+
+import com.tracker.collection.CustomList;
+import com.tracker.collection.Task;
+import com.tracker.exception.FileProcessingException;
 
 public class FileDataProviderImpl implements FileDataProvider {
     public static final String PATTERN = "dd-MM-yyyy";
@@ -139,13 +143,14 @@ public class FileDataProviderImpl implements FileDataProvider {
     @Override
     public boolean saveToFile(String filePath, CustomList<Task> tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-
+            int written = 0;
             for (Task task : tasks) {
                 writer.append(task.toString());
                 writer.newLine();
-                System.out.println("Успешно добавлено " + tasks.size() + " задач");
+                written++;
             }
             writer.flush();
+            System.out.println("Успешно добавлено " + written + " задач");
             return true;
         } catch (Exception e) {
             System.err.println("Не получилось сохранить в файл: " + tasks);
