@@ -1,15 +1,16 @@
 package com.tracker.manager;
 
-import com.tracker.collection.CustomList;
-import com.tracker.collection.Task;
-import com.tracker.patterns.BinarySearchUtil;
-import com.tracker.patterns.TaskComparators;
-
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import com.tracker.collection.CustomList;
+import com.tracker.collection.Task;
+import com.tracker.patterns.BinarySearchUtil;
+import com.tracker.patterns.TaskComparators;
 
 public class SearchManager {
     private final ExecutorService executorService;
@@ -57,7 +58,7 @@ public class SearchManager {
                 .description("")
                 .priority(Task.Priority.LOW)
                 .status(Task.Status.NEW)
-                .dueDate(null)
+                .dueDate(LocalDate.now())
                 .build();
 
         int index = BinarySearchUtil.binarySearch(sortedTasks, searchTask, TaskComparators.byId());
