@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileDataProviderImplTest {
 
     private FileDataProviderImpl provider = new FileDataProviderImpl();
-
+    // Тесты к файлам Задач
     @Test
     @DisplayName("should Read 3 Valid Tasks")
     void test1() {
@@ -165,7 +165,7 @@ class FileDataProviderImplTest {
         assertTrue(result);
         deleteFile(filePath);
     }
-
+    //Сохранение файла
     @Test
     @DisplayName("Should return false")
     void test11() {
@@ -184,7 +184,7 @@ class FileDataProviderImplTest {
         //Then
         assertFalse(result);
     }
-
+    //Чтение несуществующего файла
     @Test
     @DisplayName("Should throw FileProcessingException when file doesn't exist")
     void test12() {
